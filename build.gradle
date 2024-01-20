@@ -11,9 +11,14 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    //implementation 'org.postgresql:postgresql:42.2.23' // Replace with your database driver
     implementation 'org.springframework.boot:spring-boot-starter-mail' // For email support
     implementation 'com.h2database:h2'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-config'
+    implementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-test'
+
+
 }
 
 test {
