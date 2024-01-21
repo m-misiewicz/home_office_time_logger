@@ -22,15 +22,21 @@ public class SecurityConfig {
     }
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http.authorizeRequests()
+//                .antMatchers("/api/signup", "/api/login").permitAll() // Allow access to signup and login
+//                .antMatchers("/api/landing").authenticated() // Require authentication for landing
+//                .and().formLogin().loginPage("/api/login").defaultSuccessUrl("/api/landing", true)
+//                .permitAll().and().build();
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/landing").permitAll()
-                .antMatchers("/api/**", "/h2-console/**").permitAll()
+                .antMatchers("/api/signup", "/api/login").permitAll()
+                .antMatchers("/api/landing").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/api/login")
+                .defaultSuccessUrl("/api/landing", true)
                 .permitAll()
                 .and()
                 .logout()

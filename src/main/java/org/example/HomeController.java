@@ -38,23 +38,20 @@ public class HomeController {
     }
 
     @PostMapping("/login")
-    public String authenticateUser(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "redirect:/api/landing";
-//        return new ModelAndView(new RedirectView("/api/landing"));
-//        return new ResponseEntity<>("User login successfully!...", HttpStatus.OK);
+        return new ResponseEntity<>("User login successfully!...", HttpStatus.OK);
     }
 
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto) {            // checking for username exists in a database
         if (userRepository.existsByUsername(signUpDto.getUsername())) {
-            return new ResponseEntity<>("Username is already exist!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Username already exists!", HttpStatus.BAD_REQUEST);
         }            // checking for email exists in a database
         if (userRepository.existsByEmail(signUpDto.getEmail())) {
-            return new ResponseEntity<>("Email is already exist!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Email already exists!", HttpStatus.BAD_REQUEST);
         }            // creating user object
         User user = new User();
         user.setName(signUpDto.getName());
