@@ -63,4 +63,15 @@ public class HomeController {
         userRepository.save(user);
         return new ResponseEntity<>("User is registered successfully!", HttpStatus.OK);
     }
+
+    @PostMapping("/start-timer")
+    public ResponseEntity<String> startTimer() {
+        return new ResponseEntity<>("Timer started successfully", HttpStatus.OK);
+    }
+    @PostMapping("/stop-timer")
+    public ResponseEntity<String> stopTimer() {
+        return new ResponseEntity<>("Timer stopped successfully", HttpStatus.OK);
+    }
+
+
 }
